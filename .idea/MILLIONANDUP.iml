@@ -91,6 +91,7 @@
     <orderEntry type="library" scope="PROVIDED" name="mime-types-data (v3.2022.0105, rbenv: 3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_mime (v1.1.2, rbenv: 3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="minitest (v5.18.0, rbenv: 3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="money (v6.16.0, rbenv: 3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="msgpack (v1.6.1, rbenv: 3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-imap (v0.3.4, rbenv: 3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-pop (v0.1.2, rbenv: 3.0.1) [gem]" level="application" />
@@ -552,6 +553,14 @@
           <RakeTaskImpl description="Restart app by touching tmp/restart.txt" fullCommand="restart" id="restart" />
           <RakeTaskImpl description="Generate a cryptographically secure secret key (this is typically used to generate a secret for cookie sessions)" fullCommand="secret" id="secret" />
           <RakeTaskImpl description="Run all specs in spec directory (excluding plugin specs)" fullCommand="spec" id="spec" />
+          <RakeTaskImpl id="spec">
+            <subtasks>
+              <RakeTaskImpl description="Run the code examples in spec/helpers" fullCommand="spec:helpers" id="helpers" />
+              <RakeTaskImpl description="Run the code examples in spec/requests" fullCommand="spec:requests" id="requests" />
+              <RakeTaskImpl description="" fullCommand="spec:prepare" id="prepare" />
+              <RakeTaskImpl description="" fullCommand="spec:statsetup" id="statsetup" />
+            </subtasks>
+          </RakeTaskImpl>
           <RakeTaskImpl description="Report code statistics (KLOCs, etc) from the application or engine" fullCommand="stats" id="stats" />
           <RakeTaskImpl id="stimulus">
             <subtasks>
@@ -680,12 +689,6 @@
                   <RakeTaskImpl description="" fullCommand="railties:install:migrations" id="migrations" />
                 </subtasks>
               </RakeTaskImpl>
-            </subtasks>
-          </RakeTaskImpl>
-          <RakeTaskImpl id="spec">
-            <subtasks>
-              <RakeTaskImpl description="" fullCommand="spec:prepare" id="prepare" />
-              <RakeTaskImpl description="" fullCommand="spec:statsetup" id="statsetup" />
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl description="" fullCommand="tmp" id="tmp" />

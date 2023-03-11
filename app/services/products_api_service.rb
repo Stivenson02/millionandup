@@ -23,18 +23,19 @@ class ProductsApiService
         unify_products(products_dumy, products_faker)
       end
     rescue => e
-      { status: FAILED, response: { data: e.to_s } }
+      { status: FAILED, response: { error: e.to_s } }
     end
     { status: SUCCESS, response: { data: products } }
   end
 
   def unify_products(products_dumy, products_faker)
     products_dumy.each do |detail|
+
       self.products.push << {
         :id => products.count + 1,
         :title => detail["title"],
         :description => detail["description"],
-        :price => detail["price"],
+        :price => Money.from_cents(detail["price"], "USD"),
         :discountPercentage => detail["discountPercentage"],
         :stock => detail["stock"],
         :category => detail["category"],
@@ -46,7 +47,7 @@ class ProductsApiService
         :id => products.count + 1,
         :title => detail["title"],
         :description => detail["description"],
-        :price => detail["price"],
+        :price => Money.from_cents(detail["price"], "USD"),
         :discountPercentage => 0,
         :stock => detail["rating"]["count"],
         :category => detail["category"],

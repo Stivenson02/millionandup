@@ -178,6 +178,8 @@ GEM
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
     minitest (5.18.0)
+    money (6.16.0)
+      i18n (>= 0.6.4, <= 2)
     msgpack (1.6.1)
     net-imap (0.3.4)
       date
@@ -408,6 +410,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   letter_opener
+  money
   net-protocol
   pg (~> 1.1)
   pry-rails
