@@ -14,12 +14,14 @@ class ProductsApiService
 
   def call
     begin
-      response_dumy = RestClient.get('https://dummyjson.com/products')
-      response_faker = RestClient.get('https://fakestoreapi.com/products')
+      ActiveRecord::Base.transaction do
+        response_dumy = RestClient.get('https://dummyjson.com/products')
+        response_faker = RestClient.get('https://fakestoreapi.com/products')
 
-      products_dumy = JSON.parse(response_dumy)["products"]
-      products_faker = JSON.parse(response_faker)
-      unify_products(products_dumy, products_faker)
+        products_dumy = JSON.parse(response_dumy)["products"]
+        products_faker = JSON.parse(response_faker)
+        unify_products(products_dumy, products_faker)
+      end
     rescue => e
       { status: FAILED, response: { data: e.to_s } }
     end
@@ -29,7 +31,7 @@ class ProductsApiService
   def unify_products(products_dumy, products_faker)
     products_dumy.each do |detail|
       self.products.push << {
-        :id => products + 1,
+        :id => products.count + 1,
         :title => detail["title"],
         :description => detail["description"],
         :price => detail["price"],
