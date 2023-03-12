@@ -11,6 +11,10 @@
 #  total_currency :string           default("USD"), not null
 #
 class Trolley < ApplicationRecord
+
+  #===== Fields
+  monetize :total_cents
+
   #== Enum
   enum status: {
     created: 0,
