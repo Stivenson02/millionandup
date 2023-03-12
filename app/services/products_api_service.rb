@@ -30,7 +30,6 @@ class ProductsApiService
 
   def unify_products(products_dumy, products_faker)
     products_dumy.each do |detail|
-
       self.products.push << {
         :id => products.count + 1,
         :title => detail["title"],
