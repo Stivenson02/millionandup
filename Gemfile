@@ -54,6 +54,7 @@ gem 'slim-rails'
 gem "view_component"
 
 gem "money"
+gem 'money-rails', '~>1.12'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
