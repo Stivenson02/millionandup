@@ -23,5 +23,9 @@
               | Precio
         div
           p.font-semibold.text-gray-600
-            =link_to "Rango",root_path, class: "flex flex-row items-start rounded-lg bg-transparent p-2 hover:bg-gray-200 "
+            a[class="flex flex-row items-start rounded-lg bg-transparent p-2 hover:bg-gray-200"
+              data-reflex='click->::FilterReflex#apply_filter'
+              data-filter-id="for_rang"]
+              | Rango
+
 script[src="//unpkg.com/alpinejs" defer]

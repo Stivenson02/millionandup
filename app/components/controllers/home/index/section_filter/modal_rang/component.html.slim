@@ -1,25 +1,29 @@
-style
-  |  .animated { -webkit-animation-duration: 1s; animation-duration: 1s; -webkit-animation-fill-mode: both; animation-fill-mode: both; } .animated.faster { -webkit-animation-duration: 500ms; animation-duration: 500ms; } .fadeIn { -webkit-animation-name: fadeIn; animation-name: fadeIn; } .fadeOut { -webkit-animation-name: fadeOut; animation-name: fadeOut; } @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } } @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } } 
-div
-  button.bg-blue-500.text-white.p-2.rounded.text-2xl.font-bold[onclick="openModal()"]
-    | Open Modal
-.main-modal.fixed.w-full.h-100.inset-0.z-50.overflow-hidden.flex.justify-center.items-center.animated.fadeIn.faster[style="background: rgba(0,0,0,.7);"]
-  .border.border-teal-500.shadow-lg.modal-container.bg-white.w-11.md:max-w-md.mx-auto.rounded.shadow-lg.z-50.overflow-y-auto
-    .modal-content.py-4.text-left.px-6
-      .flex.justify-between.items-center.pb-3
-        p.text-2xl.font-bold
-          | Header
-        .modal-close.cursor-pointer.z-50
-          svg.fill-current.text-black[xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 18 18"]
-            path[d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"]
+div[id= 'modal_filter' ]
+  .relative.z-10[aria-labelledby="modal-title" role="dialog" aria-modal="true"]
+    .fixed.inset-0.bg-gray-500.bg-opacity-75.transition-opacity
+    .fixed.inset-0.z-10.overflow-y-auto
+      .flex.min-h-full.items-end.justify-center.p-4.text-center.sm:items-center.sm:p-0
+        .relative.transform.overflow-hidden.rounded-lg.bg-white.text-left.shadow-xl.transition-all.sm:my-8.sm:w-full.sm:max-w-lg
+          .bg-white.px-4.pt-5.pb-4.sm:p-6.sm:pb-4
+            .sm:flex.sm:items-start
+              .mx-auto.flex.h-12.w-12.flex-shrink-0.items-center.justify-center.rounded-full.bg-red-100.sm:mx-0.sm:h-10.sm:w-10
+                svg.h-6.w-6.text-red-600[fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"]
+                  path[stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"]
+              .mt-3.text-center.sm:mt-0.sm:ml-4.sm:text-left
+                h3#modal-title.text-base.font-semibold.leading-6.text-gray-900
+                  | Say Rang
+                = form_with url: search_home_index_path, method: :post,  html: { novalidate: "novalidate"}  do |form|
+                  p
+                    | Say Rang min and Rang Max
 
-      .my-5
-        p
-          | Inliberali Persius Multi iustitia pronuntiaret expeteretur sanos didicisset laus angusti ferrentur arbitrium arbitramur huic desiderent.?
-      .flex.justify-end.pt-2
-        button.focus:outline-none.modal-close.px-4.bg-gray-400.p-3.rounded-lg.text-black.hover:bg-gray-300
-          | Cancel
-        button.focus:outline-none.px-4.bg-teal-500.p-3.ml-3.rounded-lg.text-white.hover:bg-teal-400
-          | Confirm
-script
-  |  const modal = document.querySelector('.main-modal'); const closeButton = document.querySelectorAll('.modal-close'); const modalClose = () => { modal.classList.remove('fadeIn'); modal.classList.add('fadeOut'); setTimeout(() => { modal.style.display = 'none'; }, 500); } const openModal = () => { modal.classList.remove('fadeOut'); modal.classList.add('fadeIn'); modal.style.display = 'flex'; } for (let i = 0; i < closeButton.length; i++) { const elements = closeButton[i]; elements.onclick = (e) => modalClose(); modal.style.display = 'none'; window.onclick = function (event) { if (event.target == modal) modalClose(); } }
+                  =form.number_field :rang_min,
+                          class: "rounded-xl focus:ring-sy-light focus:border-sy-light border border-gray-300 text-xs xl:text-base", placeholder: "Min"
+                  = form.number_field :rang_max,
+                          class: "rounded-xl focus:ring-sy-light focus:border-sy-light border border-gray-300 text-xs xl:text-base", placeholder: "Max"
+                  div[class="flex justify-center my-1 2xl:my-5"]
+                    button[class="cursor-pointer rounded-full bg-white border-2 border-sy-light text-center hover:bg-sy-light text-sy-blue py-2 px-4 flex justify-center mx-auto text-sm xl:text-base"]Apply Filter
+
+          .bg-gray-50.px-4.py-3.sm:flex.sm:flex-row-reverse.sm:px-6
+            button[class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+            data-reflex='click->::FilterReflex#modal_off']
+              | Close

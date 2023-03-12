@@ -5,8 +5,8 @@ Rails.application.routes.draw do
     resource :products, module: 'products'
   end
   resources :home do
-    member do
-      get :search
+    collection do
+      post :search
     end
   end
 
