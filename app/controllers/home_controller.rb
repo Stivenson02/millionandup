@@ -7,15 +7,13 @@ class HomeController < ApplicationController
   def search
     rang_min = params[:rang_min].to_i
     rang_max = params[:rang_max].to_i
-    @products = @products.select { |product| product[:price].cents <= rang_max } unless rang_max == 0
-    @products = @products.select { |product| product[:price].cents >= rang_min }
+    @products = Product.where(price_cents: (rang_min..rang_max)) if rang_min < rang_max
     respond_to do |format|
       format.turbo_stream { render :"home/products" }
     end
   end
 
   def set_products
-    service = ProductsApiService.new.call
-    @products = service[:response][:data].sort_by { |val| [val[:title], val[:price]] } if service[:status] == ProductsApiService::SUCCESS
+    @products = Product.order(:title, :price_cents)
   end
 end

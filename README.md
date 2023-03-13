@@ -158,6 +158,9 @@ The above Rails tasks can be executed in a single instruction:
 ```bash
 $ rails db:drop db:create db:migrate db:test:prepare
 ```
+```bash
+$ rails db:seed
+```
 
 2) Run specs (unit tests)
 

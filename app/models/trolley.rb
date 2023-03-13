@@ -7,13 +7,9 @@
 #  status         :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  total_cents    :integer          default(0), not null
-#  total_currency :string           default("USD"), not null
-#
-class Trolley < ApplicationRecord
+#  total
 
-  #===== Fields
-  monetize :total_cents
+class Trolley < ApplicationRecord
 
   #== Enum
   enum status: {
@@ -21,4 +17,7 @@ class Trolley < ApplicationRecord
     in_process: 1,
     paid: 2
   }, _default: :created
+
+  #===== Associations
+  has_many :trolley_details
 end

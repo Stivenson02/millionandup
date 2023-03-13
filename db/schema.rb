@@ -14,22 +14,39 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_12_210659) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "trolley_details", force: :cascade do |t|
-    t.integer "product_id", null: false
-    t.integer "amount", null: false
+  create_table "products", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "description", null: false
+    t.string "discountPercentage", null: false
+    t.string "category", null: false
+    t.string "thumbnail", null: false
+    t.integer "stock", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "price_cents", default: 0, null: false
     t.string "price_currency", default: "USD", null: false
   end
 
-  create_table "trolleys", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "status", null: false
+  create_table "trolley_details", force: :cascade do |t|
+    t.integer "amount", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "total_cents", default: 0, null: false
-    t.string "total_currency", default: "USD", null: false
+    t.bigint "trolley_id", null: false
+    t.bigint "product_id", null: false
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "USD", null: false
+    t.index ["product_id"], name: "index_trolley_details_on_product_id"
+    t.index ["trolley_id"], name: "index_trolley_details_on_trolley_id"
   end
 
+  create_table "trolleys", force: :cascade do |t|
+    t.integer "user_id", default: 0
+    t.string "status"
+    t.string "total", default: "0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "trolley_details", "products"
+  add_foreign_key "trolley_details", "trolleys"
 end

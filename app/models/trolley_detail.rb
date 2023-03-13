@@ -4,6 +4,7 @@
 #
 #  id             :bigint           not null, primary key
 #  product_id     :integer          not null
+#  trolley_id     :integer          not null
 #  amount         :integer          not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
@@ -13,6 +14,9 @@
 class TrolleyDetail < ApplicationRecord
 
   #===== Fields
-  monetize :amount_cents
+  monetize :price_cents
+
+  #===== Associations
+  belongs_to :product
 
 end
