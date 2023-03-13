@@ -14,7 +14,7 @@ class TrolleyReflex < ApplicationReflex
     trolley = TrolleyService.new(trolley_detail: trolley_detail, type: :delete_product).call
 
     return close_modal_trolley if  trolley[:status] == TrolleyService::FAILED || trolley[:response][:data].destroyed?
-    return morph "#trolley_detail_#{trolley_detail.id}", render(::Controllers::Home::Index::SectionTrolley::ModalTrolley::DetailTrolley::Product::Component.new(options: {trolley_detail: trolley[:response][:detail]}))
+    return morph "#modal_trolley", render(::Controllers::Home::Index::SectionTrolley::ModalTrolley::Component.new(options: { trolley: trolley[:response][:data] }))
   end
 
   def show_modal_trolley
@@ -24,5 +24,9 @@ class TrolleyReflex < ApplicationReflex
 
   def close_modal_trolley
     return morph "#modal_trolley", ""
+  end
+
+  def checkout
+
   end
 end

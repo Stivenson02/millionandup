@@ -49,7 +49,8 @@ class TrolleyService
   def edit_trolley
     total = 0
     trolley.trolley_details.each do |detail|
-      total = total + detail.price_cents
+      detail_total = detail.price_cents * detail.amount
+      total = total + detail_total
     end
     trolley.total = total
     trolley.save!
