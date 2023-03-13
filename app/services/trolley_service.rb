@@ -1,29 +1,32 @@
 class TrolleyService
 
   require 'rest-client'
-  attr_accessor :product, :trolley, :trolley_detail
+  attr_accessor :product, :trolley, :trolley_detail, :type
 
   RETURNS = [
     SUCCESS = :success,
     FAILED = :failed
   ].freeze
 
-  def initialize(product: nil)
+  def initialize(product: nil, type: :add_product, trolley_detail: nil)
     self.product = product
+    self.type = type
+    self.trolley_detail = trolley_detail
   end
 
   def call
     begin
       ActiveRecord::Base.transaction do
         set_trolley
-        set_trolley_detail
-        add_product
-        edit_trolley
+        set_trolley_detail if trolley_detail.nil?
+        add_product if type == :add_product
+        delete_product if type == :delete_product
+        edit_trolley if trolley.trolley_details.count > 0
       end
     rescue => e
       { status: FAILED, response: { error: e.to_s } }
     end
-    { status: SUCCESS, response: { data: trolley } }
+    { status: SUCCESS, response: { data: trolley, detail: trolley_detail } }
   end
 
   def set_trolley
@@ -46,10 +49,18 @@ class TrolleyService
   def edit_trolley
     total = 0
     trolley.trolley_details.each do |detail|
-      total= total + detail.price_cents
+      total = total + detail.price_cents
     end
     trolley.total = total
     trolley.save!
+  end
+
+  def delete_product
+    trolley_detail.amount -= 1
+    trolley_detail.save!
+    trolley_detail.destroy! if trolley_detail.amount <= 0
+    trolley.reload
+    trolley.destroy! if trolley.trolley_details.count == 0
   end
 
 end
