@@ -22,4 +22,4 @@
               p
                 |  Total pay
               b
-                ="$ #{@trolley.total}"
+                =Money.from_cents(@trolley.total, "USD").format
