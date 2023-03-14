@@ -11,9 +11,12 @@
 #  price_currency :string           default("USD"), not null
 #
 FactoryBot.define do
-  factory :trolley_detail do
-    product_id { 1 }
+  model = ::TrolleyDetail
+  factory_key = model.model_name.singular.to_sym
+  factory factory_key, class: model do
+    product_id { create(::Product.model_name.singular.to_sym).id }
     amount { 1 }
-    price { "MyString" }
+    trolley_id { create(::Trolley.model_name.singular.to_sym).id }
+    price { Money.from_cents(2000, "USD") }
   end
 end

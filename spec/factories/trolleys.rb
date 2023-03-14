@@ -11,9 +11,11 @@
 #  total_currency :string           default("USD"), not null
 #
 FactoryBot.define do
-  factory :trolley do
-    total { "MyString" }
+  model = ::Trolley
+  factory_key = model.model_name.singular.to_sym
+  factory factory_key, class: model do
+    total { "0" }
     user_id { 1 }
-    status { "MyString" }
+    status { 0 }
   end
 end

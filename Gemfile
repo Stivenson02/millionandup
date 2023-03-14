@@ -95,8 +95,6 @@ end
 
 gem "stimulus_reflex", "= 3.5.0.pre8"
 
-gem 'sdoc', git: 'https://github.com/Symplifica/sdoc'
-
 gem 'devise_masquerade', git: 'https://github.com/oivoodoo/devise_masquerade.git'
 
 gem 'faker'

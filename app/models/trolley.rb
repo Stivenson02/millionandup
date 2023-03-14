@@ -20,4 +20,5 @@ class Trolley < ApplicationRecord
 
   #===== Associations
   has_many :trolley_details
+
 end
