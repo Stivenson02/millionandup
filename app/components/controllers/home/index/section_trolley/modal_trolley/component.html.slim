@@ -1,4 +1,3 @@
-
 .relative.z-50[aria-labelledby="modal-title" role="dialog" aria-modal="true"]
   .fixed.inset-0.bg-gray-500.bg-opacity-75.transition-opacity
   .fixed.inset-0.z-10.overflow-y-auto
@@ -6,7 +5,7 @@
       .relative.transform.overflow-hidden.rounded-lg.bg-white.text-left.shadow-xl.transition-all.sm:my-8.sm:w-full.sm:max-w-lg
         .font-bold.text-xl.text-center.mt-5.mb-2
           | Shopping Cart
-        =render ::Controllers::Home::Index::SectionTrolley::ModalTrolley::DetailTrolley::Component.new(options: {trolley_datil: @trolley.trolley_details})
+        = render ::Controllers::Home::Index::SectionTrolley::ModalTrolley::DetailTrolley::Component.new(options: { trolley_datil: @trolley.trolley_details })
         .bg-gray-50.px-4.py-3
           .sm:flex.sm:flex-row-reverse.sm:px-6
             button[class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
@@ -15,11 +14,11 @@
 
             div[class="mr-28" ]
               button[class="mt-3 inline-flex w-full justify-center rounded-md bg-lime-500 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-green-300 hover:bg-green-50 sm:mt-0 sm:w-auto"
-                data-reflex='click->::TrolleyReflex#checkout' data-trolley_id= "#{@trolley.id}"]
+                data-reflex='click->::TrolleyReflex#checkout' data-trolley-id= "#{@trolley.id}"]
                   | Checkout
 
             div[class="mr-20" ]
               p
                 |  Total pay
               b
-                =Money.from_cents(@trolley.total, "USD").format
+                = Money.from_cents(@trolley.total, "USD").format

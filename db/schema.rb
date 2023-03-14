@@ -41,7 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_12_210659) do
 
   create_table "trolleys", force: :cascade do |t|
     t.integer "user_id", default: 0
-    t.string "status"
+    t.integer "status", null: false
     t.string "total", default: "0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
