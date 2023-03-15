@@ -150,8 +150,8 @@ In this step each migration can be in the following states:
 
 * `db:drop`(optional): delete project database if exist.
 * `db:create`: create project database.
-* `db:migrate`: run migrations of the folder `sy_app/db/migrate`.
-* `db:test:prepare`: run migrations of the folder `sy_app/db/migrate`on the test environment.
+* `db:migrate`: run migrations of the folder `MILLIONANDUP/db/migrate`.
+* `db:test:prepare`: run migrations of the folder `MILLIONANDUP/db/migrate`on the test environment.
 
 The above Rails tasks can be executed in a single instruction:
 
