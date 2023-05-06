@@ -1,0 +1,34 @@
+<div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url('https://img.freepik.com/premium-vector/online-shopping-digital-technology-with-icon-blue-background-ecommerce-online-store-marketing_252172-219.jpg')">
+  <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+    <div class="text-white">
+      <div class="mb-8 flex flex-col items-center ">
+        <img src="https://img.icons8.com/dotty/80/FFFFFF/administrator-male.png" width="150" />
+        <h1 class="mb-2 text-2xl">Sign up Client</h1>
+        <span class="text-gray-300">Register</span>
+      </div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "users/shared/error_messages", resource: resource %>
+        <div class="mb-4 text-lg">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md", placeholder:"id@email.com" %>
+        </div>
+
+        <div class="mb-4 text-lg">
+   <!--       <%# if @minimum_password_length %>
+            <em>(<%#= @minimum_password_length %> characters minimum)</em>
+          <%# end %>-->
+          <%= f.password_field :password, autocomplete: "new-password", class: "rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md", placeholder:"*********"%>
+        </div>
+        <div class="mb-4 text-lg">
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md", placeholder:"*********"%>
+        </div>
+
+        <div class="mt-8 flex justify-center text-lg text-black">
+          <%= f.submit "Register", class:"rounded-3xl bg-yellow-400 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600" %>
+        </div>
+      <% end %>
+      <br>
+      <%= render "users/shared/links" %>
+    </div>
+  </div>
+</div>
+
