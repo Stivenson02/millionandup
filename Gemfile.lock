@@ -397,6 +397,7 @@ DEPENDENCIES
   clockwork-test
   colorize
   debug
+  devise (~> 4.9)
   devise_masquerade!
   dotenv-rails
   factory_bot_rails
