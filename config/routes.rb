@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :product do
+    resources :categories
+  end
 
   root 'home#index'
 

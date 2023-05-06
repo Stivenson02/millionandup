@@ -1,0 +1,10 @@
+p style="color: green" = notice
+
+== render @product_category
+
+div
+  => link_to "Edit this category", edit_product_category_path(@product_category)
+  '|
+  =< link_to "Back to categories", product_categories_path
+
+  = button_to "Destroy this category", @product_category, method: :delete

@@ -2,13 +2,12 @@
 #
 # Table name: trolleys
 #
-#  id             :bigint           not null, primary key
-#  user_id        :integer
-#  status         :string           not null
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  total_cents    :integer          default(0), not null
-#  total_currency :string           default("USD"), not null
+#  id         :bigint           not null, primary key
+#  status     :integer          not null
+#  total      :string           default("0")
+#  user_ip    :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 FactoryBot.define do
   model = ::Trolley

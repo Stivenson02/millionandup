@@ -3,7 +3,7 @@
 class HistoryReflex < ApplicationReflex
 
   def show_modal_history
-    trolleys = Trolley.where(user_id: 0)
+    trolleys = Trolley.where(user_ip: nil)
     return morph "#modal_history", render(::Controllers::Home::Index::SectionShoppingHistory::ModalHistory::Component.new(options: { trolleys: trolleys }))
   end
 

@@ -1,4 +1,4 @@
-# Million and UP
+# One Test
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/46f4a14044a64c64b7ee62dc2aab39e9)](https://www.codacy.com?utm_source=bitbucket.org&amp;utm_medium=referral&amp;utm_content=symplifica/syapp&amp;utm_campaign=Badge_Grade)
 
@@ -112,7 +112,7 @@ To run this project you must have the following programs installed:
 
 1) Clone this repository
 
-2) Clone the repositories of the [Rails Engines](#engines) section  on folder `MILLIONANDUP/engines`.
+2) Clone the repositories of the [Rails Engines](#engines) section  on folder `ONETEST/engines`.
 
 > ⚠️ Remember that each Rails Engine has its own readme for its own configuration, so do not proceed without having those engines working correctly.
 
@@ -150,8 +150,8 @@ In this step each migration can be in the following states:
 
 * `db:drop`(optional): delete project database if exist.
 * `db:create`: create project database.
-* `db:migrate`: run migrations of the folder `MILLIONANDUP/db/migrate`.
-* `db:test:prepare`: run migrations of the folder `MILLIONANDUP/db/migrate`on the test environment.
+* `db:migrate`: run migrations of the folder `ONETEST/db/migrate`.
+* `db:test:prepare`: run migrations of the folder `ONETEST/db/migrate`on the test environment.
 
 The above Rails tasks can be executed in a single instruction:
 

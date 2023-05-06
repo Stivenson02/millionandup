@@ -30,7 +30,7 @@ class TrolleyService
   end
 
   def set_trolley
-    self.trolley = Trolley.where(user_id: 0, status: %i[created in_process]).first_or_initialize
+    self.trolley = Trolley.where(user_ip: nil, status: %i[created in_process]).first_or_initialize
     trolley.save! if trolley.new_record?
   end
 

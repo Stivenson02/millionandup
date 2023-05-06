@@ -9,7 +9,7 @@ section.py-10.bg-gray-100
           h2.text-slate-700
             = "#{product[:title]}"
           p.mt-1.text-sm.text-slate-400
-            = "#{product[:category]} | stock: #{product[:stock]}"
+            = "#{product.category.name} | stock: #{product[:stock]}"
           .mt-3.flex.items-end.justify-between
             p.text-lg.font-bold.text-blue-500
               = "#{product.price.format}"

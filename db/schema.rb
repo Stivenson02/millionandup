@@ -14,17 +14,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_12_210659) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "product_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "title", null: false
     t.string "description", null: false
     t.string "discountPercentage", null: false
-    t.string "category", null: false
+    t.bigint "category_id", null: false
     t.string "thumbnail", null: false
     t.integer "stock", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "price_cents", default: 0, null: false
     t.string "price_currency", default: "USD", null: false
+    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
   create_table "trolley_details", force: :cascade do |t|
@@ -40,13 +47,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_12_210659) do
   end
 
   create_table "trolleys", force: :cascade do |t|
-    t.integer "user_id", default: 0
+    t.string "user_ip"
     t.integer "status", null: false
     t.string "total", default: "0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "products", "product_categories", column: "category_id"
   add_foreign_key "trolley_details", "products"
   add_foreign_key "trolley_details", "trolleys"
 end

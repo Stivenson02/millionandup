@@ -19,7 +19,7 @@ class TrolleyReflex < ApplicationReflex
   end
 
   def show_modal_trolley
-    trolley = Trolley.find_by(user_id: 0, status: :created)
+    trolley = Trolley.find_by(user_ip: nil, status: :created)
     return morph "#modal_trolley", render(::Controllers::Home::Index::SectionTrolley::ModalTrolley::Component.new(options: { trolley: trolley }))
   end
 

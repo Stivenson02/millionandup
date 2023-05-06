@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 Categories
+
+#product_categories
+  - @product_categories.each do |product_category|
+    == render product_category
+    p
+      = link_to "Show this category", product_category
+
+= link_to "New category", new_product_category_path
