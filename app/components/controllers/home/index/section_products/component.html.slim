@@ -16,7 +16,9 @@ section.py-10.bg-gray-100
             - if product[:stock] > 0
               a[class="flex items-center space-x-1 rounded-lg bg-blue-500 px-4 py-1 text-white duration-100 hover:bg-green-600"
                 data-reflex='click->::TrolleyReflex#add_product'
-                data-product-id="#{product[:id]}"]
+                data-product-id="#{product[:id]}"
+                data-user-ip= @user_ip
+                data-user-login= @user_login]
                 | Add To cart
             - else
               .flex.items-center.space-x-1.rounded-lg.bg-gray-200.px-4.py-1.text-black.duration-100.hover:bg-blue-600

@@ -28,5 +28,6 @@ class TrolleyDetail < ApplicationRecord
 
   #===== Associations
   belongs_to :product
+  belongs_to :trolley
 
 end

@@ -4,10 +4,10 @@ class TrolleyReflex < ApplicationReflex
 
   def add_product
     product = Product.find(element[:data_product_id].to_i)
-    trolley = TrolleyService.new(product: product).call
+    trolley = TrolleyService.new(product: product, user_ip: element[:data_user_ip], user_login: element[:data_user_login]).call
     t_count = 0
     trolley[:response][:data].trolley_details.each { |a| t_count = t_count + a.amount }
-    return morph "#count_trolley", render(::Controllers::Home::Index::SectionTrolley::Component.new(options: { trolley_count: t_count }))
+    return morph "#count_trolley", render(::Controllers::Home::Index::SectionTrolley::Component.new(options: { trolley_count: t_count, user_ip: element[:data_user_ip], user_login: element[:data_user_login]}))
   end
 
   def delete_trolley_detail
@@ -15,12 +15,12 @@ class TrolleyReflex < ApplicationReflex
     trolley = TrolleyService.new(trolley_detail: trolley_detail, type: :delete_product).call
 
     return close_modal_trolley if trolley[:status] == TrolleyService::FAILED || trolley[:response][:data].destroyed?
-    return morph "#modal_trolley", render(::Controllers::Home::Index::SectionTrolley::ModalTrolley::Component.new(options: { trolley: trolley[:response][:data] }))
+    return morph "#modal_trolley", render(::Controllers::Home::Index::SectionTrolley::ModalTrolley::Component.new(options: { trolley: trolley[:response][:data], user_ip: element[:data_user_ip], user_login: element[:data_user_login] }))
   end
 
   def show_modal_trolley
-    trolley = Trolley.find_by(user_ip: nil, status: :created)
-    return morph "#modal_trolley", render(::Controllers::Home::Index::SectionTrolley::ModalTrolley::Component.new(options: { trolley: trolley }))
+    trolley = TrolleyService.new(type: :show_trolley, user_ip: element[:data_user_ip], user_login: element[:data_user_login]).call
+    return morph "#modal_trolley", render(::Controllers::Home::Index::SectionTrolley::ModalTrolley::Component.new(options: { trolley: trolley[:response][:data], user_ip: element[:data_user_ip], user_login: element[:data_user_login] }))
   end
 
   def close_modal_trolley

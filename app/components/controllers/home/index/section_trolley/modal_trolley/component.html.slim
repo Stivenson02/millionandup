@@ -5,7 +5,7 @@
       .relative.transform.overflow-hidden.rounded-lg.bg-white.text-left.shadow-xl.transition-all.sm:my-8.sm:w-full.sm:max-w-lg
         .font-bold.text-xl.text-center.mt-5.mb-2
           | Shopping Cart
-        = render ::Controllers::Home::Index::SectionTrolley::ModalTrolley::DetailTrolley::Component.new(options: { trolley_datil: @trolley.trolley_details })
+        = render ::Controllers::Home::Index::SectionTrolley::ModalTrolley::DetailTrolley::Component.new(options: { trolley_datil: @trolley.trolley_details, user_ip: @user_ip, user_login: @user_login})
         .bg-gray-50.px-4.py-3
           .sm:flex.sm:flex-row-reverse.sm:px-6
             button[class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"

@@ -1,3 +1,3 @@
 .bg-white
   div[id= 'put_filters' ]
-    = render ::Controllers::Home::Index::SectionProducts::Component.new(options: { products: @products })
+    = render ::Controllers::Home::Index::SectionProducts::Component.new(options: { products: @products, user_ip: @user_ip, user_login: @user_login })

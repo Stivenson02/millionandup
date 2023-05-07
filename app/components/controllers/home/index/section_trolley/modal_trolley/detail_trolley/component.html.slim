@@ -3,4 +3,4 @@
     .relative
       -@trolley_details.each do |detail|
         div[id="trolley_detail_#{detail.id}"]
-          =render ::Controllers::Home::Index::SectionTrolley::ModalTrolley::DetailTrolley::Product::Component.new(options: {trolley_detail: detail})
+          =render ::Controllers::Home::Index::SectionTrolley::ModalTrolley::DetailTrolley::Product::Component.new(options: {trolley_detail: detail, user_ip: @user_ip, user_login: @user_login})
