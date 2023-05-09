@@ -12,20 +12,16 @@
 #  title              :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  category_id        :bigint           not null
-#
-# Indexes
-#
-#  index_products_on_category_id  (category_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (category_id => product_categories.id)
 #
 class Product < ApplicationRecord
   #===== Fields
   monetize :price_cents
 
   #===== Associations
-  belongs_to :category
+  has_many :product_categories, class_name: Product::Category.name, foreign_key: :product_id
+
+  def category
+    self.product_categories.sample.category
+  end
+
 end
