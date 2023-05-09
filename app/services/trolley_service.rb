@@ -30,7 +30,8 @@ class TrolleyService
         { status: FAILED, response: { error: e.to_s } }
       end
     end
-    edit_trolley if trolley.trolley_details.count > 0
+
+    edit_trolley if !trolley.nil? && trolley.trolley_details.count > 0
     { status: SUCCESS, response: { data: trolley, detail: trolley_detail } }
   end
 
@@ -42,7 +43,7 @@ class TrolleyService
     else
       trolley_unificate unless user_login.nil?
       trolley_user = TrolleyUser.joins(:trolley).find_by(trolley: { status: %i[in_process] }, user_id: user_login)
-      self.trolley = trolley_user.trolley
+      self.trolley = trolley_user&.trolley
     end
   end
 

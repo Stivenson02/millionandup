@@ -10,6 +10,6 @@
 class Category < ApplicationRecord
 
   #===== Associations
-  has_many :product_categories, class_name: Product::Category.name, foreign_key: "category_id"
+  has_many :product_categories, class_name: Product::Category.name, foreign_key: :category_id
 
 end

@@ -47,10 +47,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_07_140252) do
     t.string "discountPercentage", null: false
     t.string "thumbnail", null: false
     t.integer "stock", null: false
+    t.bigint "creator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "price_cents", default: 0, null: false
     t.string "price_currency", default: "USD", null: false
+    t.index ["creator_id"], name: "index_products_on_creator_id"
   end
 
   create_table "trolley_details", force: :cascade do |t|
@@ -96,6 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_07_140252) do
 
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "products"
+  add_foreign_key "products", "admins", column: "creator_id"
   add_foreign_key "trolley_details", "products"
   add_foreign_key "trolley_details", "trolleys"
   add_foreign_key "trolley_users", "trolleys"

@@ -22,6 +22,7 @@ class Product::Category < ApplicationRecord
 
   #===== Associations
   belongs_to :product, class_name: ::Product.name
+  belongs_to :category, class_name: ::Category.name
 
   def category
     Category.find(self.category_id)

@@ -52,6 +52,7 @@ class ProductsApiService
     products_dumy = api[:object].nil? ? JSON.parse(response) : JSON.parse(response)[api[:object]]
 
     products_dumy.each do |detail|
+
       category = Category.where(name: detail[api[:fields][:category]]).first_or_initialize
       category.save! if category.new_record?
       product = Product.where(title: detail[api[:fields][:title]]).first_or_initialize
@@ -61,6 +62,7 @@ class ProductsApiService
         product.discountPercentage = api[:fields][:discountPercentage].nil? ? 0 : detail[api[:fields][:discountPercentage]]
         product.stock = api[:fields][:stock].nil? ? rand(10) : detail[api[:fields][:stock]]
         product.thumbnail = detail[api[:fields][:thumbnail]]
+        product.creator = Admin.first
         product.save!
 
         product_category = Product::Category.find_or_initialize_by(category: category, product: product)
