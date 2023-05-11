@@ -3,7 +3,7 @@ class Product::CategoriesController < ApplicationController
 
   # GET /product/categories or /product/categories.json
   def index
-    @product_categories = Product::Category.all
+    @product_categories = Category.all.sort
   end
 
   # GET /product/categories/1 or /product/categories/1.json
@@ -12,7 +12,7 @@ class Product::CategoriesController < ApplicationController
 
   # GET /product/categories/new
   def new
-    @product_category = Product::Category.new
+    @product_category = Category.new
   end
 
   # GET /product/categories/1/edit
@@ -21,10 +21,12 @@ class Product::CategoriesController < ApplicationController
 
   # POST /product/categories or /product/categories.json
   def create
-    @product_category = Product::Category.new(product_category_params)
+
+    @product_category = Category.new(product_category_params)
 
     respond_to do |format|
       if @product_category.save
+        Historical.create(admin: current_admin, movement: @product_category)
         format.html { redirect_to product_category_url(@product_category), notice: "Category was successfully created." }
         format.json { render :show, status: :created, location: @product_category }
       else
@@ -38,6 +40,7 @@ class Product::CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @product_category.update(product_category_params)
+        Historical.create(admin: current_admin, movement: @product_category, change: :edit)
         format.html { redirect_to product_category_url(@product_category), notice: "Category was successfully updated." }
         format.json { render :show, status: :ok, location: @product_category }
       else
@@ -60,11 +63,11 @@ class Product::CategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product_category
-      @product_category = Product::Category.find(params[:id])
+      @product_category = Category.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def product_category_params
-      params.require(:product_category).permit(:name)
+      params.permit(:name)
     end
 end

@@ -1,8 +1,14 @@
-h1 New category
+div [class="flex flex-wrap min-h-screen w-full content-center justify-center bg-gray-200 py-10"]
+  .flex.shadow-md
+    div[ class="flex flex-wrap content-center justify-center rounded-r-md" style="width: 24rem; height: 32rem;"]
+      img[ class="w-full h-full bg-center bg-no-repeat bg-cover rounded-r-md" src="https://media.istockphoto.com/id/1072154424/es/vector/nueva-etiqueta-nuevo-signo-nuevo-banner-icono-de-vector.jpg?s=170667a&w=0&k=20&c=ktPxsqiBgApyN0bF8XKCuPEy9FX2B08SqMqP3D2PiKQ="]
 
-== render "form", product_category: @product_category
+    div[ class="flex flex-wrap content-center justify-center rounded-l-md bg-white" style="width: 24rem; height: 32rem;"]
+      .w-72
+        h1.text-xl.font-semibold New Category
+        small.text-gray-400 Add new category
+        == render "new_form", product_category: @product_category
+      .text-center
+        = link_to " Back to categories", product_categories_path, class:"text-xs font-semibold text-blue-700"
 
-br
 
-div
-  = link_to "Back to categories", product_categories_path

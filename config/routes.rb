@@ -21,12 +21,12 @@ Rails.application.routes.draw do
       namespace :admins do
         get 'dashboard/index', as: :authenticated_root
       end
+      namespace :product do
+        resources :categories
+      end
     end
   end
 
-  namespace :product do
-    resources :categories
-  end
 
   root 'home#index'
 

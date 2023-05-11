@@ -1,10 +1,18 @@
-h1 Editing category
+div [class="flex flex-wrap min-h-screen w-full content-center justify-center bg-gray-200 py-10"]
+  .flex.shadow-md
+    div[ class="flex flex-wrap content-center justify-center rounded-r-md" style="width: 24rem; height: 32rem;"]
+      img[ class="w-full h-full bg-center bg-no-repeat bg-cover rounded-r-md" src="https://media.licdn.com/dms/image/C4D12AQEyixu8LXtkhg/article-inline_image-shrink_400_744/0/1607509642252?e=1687392000&v=beta&t=sZzv75Ob5An6ujtwdAXZpU0UFb_Jj_g44sHfBlKl37E"]
 
-== render "form", product_category: @product_category
+    div[ class="flex flex-wrap content-center justify-center rounded-l-md bg-white" style="width: 24rem; height: 32rem;"]
+      .w-72
+        h1.text-xl.font-semibold Edit Category
+        small.text-gray-400
+          = "Current Name: "
+          span.text-black.font-bold
+            =" #{@product_category.name}"
+        == render "edit_form", product_category: @product_category
+      .text-center
+        = link_to "Show this category |", product_category_path(id: @product_category.id), class:"text-xs font-semibold text-blue-500"
 
-br
+        = link_to " Back to categories", product_categories_path, class:"text-xs font-semibold text-blue-700"
 
-div
-  => link_to "Show this category", @product_category
-  '|
-  =< link_to "Back to categories", product_categories_path

@@ -1,4 +1,24 @@
 div id="#{dom_id category}"
-  p
-    strong Name:
-    =< category.name
+  td[ class="px-5 py-5 border-b border-gray-200 bg-white text-sm"]
+    .flex.items-center
+      .lex-shrink-0.w-10.h-10
+        img[ class="w-full h-full rounded-full"
+             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQdXkgX6gGXdsezuR3MBbiZ35ris2BmD2lefCGuNUYeXx5dCgcE5ZNzk8f9CO7BozbVQI&usqp=CAU"
+             alt=""]
+      .ml-3
+        p.text-gray-900.whitespace-no-wrap
+          = category.name
+
+  td[ class="px-5 py-5 border-b border-gray-200 bg-white text-sm"]
+    p.text-gray-900.whitespace-no-wrap
+      =Category.last.historicals.find_by(change: :created).admin.email
+
+  td[ class="px-5 py-5 border-b border-gray-200 bg-white text-sm"]
+    p.text-gray-900.whitespace-no-wrap
+      = category.created_at.to_date
+
+  td[ class="px-5 py-5 border-b border-gray-200 bg-white text-sm"]
+    p.text-gray-900.whitespace-no-wrap
+      = category.product_categories.count
+
+

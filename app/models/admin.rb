@@ -22,5 +22,5 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :products, class_name: ::Product.name, foreign_key: :creator_id
+  has_many :submitted_movements, class_name: ::Historical.name, foreign_key: :admin_id
 end

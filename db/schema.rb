@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_07_140252) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_143217) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_07_140252) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "historicals", force: :cascade do |t|
+    t.bigint "admin_id", null: false
+    t.string "movement_type", null: false
+    t.bigint "movement_id", null: false
+    t.integer "change"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_historicals_on_admin_id"
+    t.index ["movement_type", "movement_id"], name: "index_historicals_on_movement"
+  end
+
   create_table "product_categories", force: :cascade do |t|
     t.bigint "category_id", null: false
     t.bigint "product_id", null: false
@@ -47,12 +58,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_07_140252) do
     t.string "discountPercentage", null: false
     t.string "thumbnail", null: false
     t.integer "stock", null: false
-    t.bigint "creator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "price_cents", default: 0, null: false
     t.string "price_currency", default: "USD", null: false
-    t.index ["creator_id"], name: "index_products_on_creator_id"
   end
 
   create_table "trolley_details", force: :cascade do |t|
@@ -96,9 +105,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_07_140252) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "historicals", "admins"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "products"
-  add_foreign_key "products", "admins", column: "creator_id"
   add_foreign_key "trolley_details", "products"
   add_foreign_key "trolley_details", "trolleys"
   add_foreign_key "trolley_users", "trolleys"
