@@ -46,7 +46,6 @@ class Product::ProductsController < ApplicationController
 
   # PATCH/PUT /product/products/1 or /product/products/1.json
   def update
-    binding.pry
     respond_to do |format|
 
       thumbnail = product_product_params[:thumbnail].empty? ? @product_product.thumbnail : product_product_params[:thumbnail]
