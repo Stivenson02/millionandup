@@ -22,8 +22,15 @@ class Product < ApplicationRecord
   has_many :product_categories, class_name: Product::Category.name, foreign_key: :product_id
 
   def category
-    self.product_categories.sample.category
+    self.product_categories&.sample&.category
   end
 
+  validates :description,
+            :discountPercentage,
+            :stock,
+            :thumbnail,
+            :title,
+            presence: true
+  validates :price_cents, numericality: { greater_than: 0, only_integer: true }
 
 end

@@ -1,0 +1,36 @@
+.mt-4
+  = form_with url: product_product_path(id: @product_product.id), format: :turbo_stream, method: :put do |form|
+    - if @product_product.errors.any?
+      div style="color: red"
+        h2 = "#{pluralize(@product_product.errors.count, "error")} prohibited this product_category from being saved:"
+        ul
+          - @product_product.errors.each do |error|
+            li = error.full_message
+
+    .mb-3
+      = form.label :title, style: "display: block", class:"mb-2 block text-xs font-semibold"
+      = form.text_field :title, value: @product_product.title,class:"block w-full rounded-md border border-gray-300 focus:border-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-700 py-1 px-1.5 text-gray-500"
+
+    .mb-3
+      = form.label :description, style: "display: block", class: "mb-2 block text-xs font-semibold"
+      = form.text_area :description, value: @product_product.description, class: "block w-full rounded-md border border-gray-300 focus:border-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-700 py-1 px-1.5 text-gray-500"
+
+    .mb-3
+      = form.label :discountPercentage, style: "display: block", class: "mb-2 block text-xs font-semibold"
+      = form.number_field :discountPercentage, value: @product_product.discountPercentage, class: "block w-full rounded-md border border-gray-300 focus:border-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-700 py-1 px-1.5 text-gray-500"
+
+    .mb-3
+      = form.label "Price: #{@product_product.price.format}", style: "display: block", class: "mb-2 block text-xs font-semibold"
+      = form.number_field :price, value: @product_product.price_cents, class: "block w-full rounded-md border border-gray-300 focus:border-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-700 py-1 px-1.5 text-gray-500"
+
+    .mb-3
+      = form.label :stock, style: "display: block", class: "mb-2 block text-xs font-semibold"
+      = form.number_field :stock, value: @product_product.stock, class: "block w-full rounded-md border border-gray-300 focus:border-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-700 py-1 px-1.5 text-gray-500"
+
+    .mb-3
+      = form.label :url_img_principal, style: "display: block", class: "mb-2 block text-xs font-semibold"
+      = form.text_field :thumbnail, class: "block w-full rounded-md border border-gray-300 focus:border-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-700 py-1 px-1.5 text-gray-500"
+
+    .mb-3
+      = form.submit class:"mb-1.5 block w-full text-center text-white bg-blue-700 hover:bg-blue-900 px-2 py-1.5 rounded-md"
+

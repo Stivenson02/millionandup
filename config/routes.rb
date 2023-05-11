@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users, path: 'users', controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations"
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
       end
       namespace :product do
         resources :categories
+        resources :products
       end
     end
   end

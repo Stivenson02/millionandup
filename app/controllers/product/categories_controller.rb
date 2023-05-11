@@ -3,7 +3,7 @@ class Product::CategoriesController < ApplicationController
 
   # GET /product/categories or /product/categories.json
   def index
-    @product_categories = Category.all.sort
+    @product_categories = Category.all.sort_by { |c| c.updated_at }.reverse
   end
 
   # GET /product/categories/1 or /product/categories/1.json

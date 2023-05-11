@@ -1,2 +1,3 @@
 module Admins::DashboardHelper
+
 end

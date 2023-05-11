@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   rescue_from ApiClient::Exceptions::NotFound, :with => :not_found
   include Users::DashboardHelper
+  include SharedHelper
 
   before_action :set_action_cable_identifier
 
