@@ -1,0 +1,28 @@
+div [class="grid grid-cols-5 gap-4"]
+  div[class="col-start-2 col-span-3 col-span-4" ]
+    .mt-4
+      = form_with url: add_product_images_product_product_path(id: @product_product.id) do |form|
+        - if @product_product.errors.any?
+          div style="color: red"
+            h2 = "#{pluralize(@product_product.errors.count, "error")} prohibited this product from being saved:"
+
+        .mb-3
+          = form.label :pictures, style: "display: block", class: "mb-2 block text-xs font-semibold"
+          = form.file_field :pictures, multiple: true, class: "block w-full rounded-md border border-gray-300 focus:border-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-700 py-1 px-1.5 text-gray-500"
+
+        .mb-3
+          = form.submit class: "mb-1.5 block w-full text-center text-white bg-blue-700 hover:bg-blue-900 px-2 py-1.5 rounded-md"
+
+  div
+  -@product_product.pictures.each do |picture|
+    div
+      div[class="h-full w-full"]
+        div[class="relative w-full"]
+          =image_tag(picture, class: "mb-3 h-full w-full rounded-xl 3xl:h-full 3xl:w-full")
+
+          = button_to destroy_product_image_product_product_path(id: @product_product.id, picture_id: picture.id), method: :delete, class:"absolute top-3 right-3 flex items-center justify-center rounded-full bg-white p-2 text-brand-500 hover:cursor-pointer"
+            div[ class="flex h-full w-full items-center justify-center rounded-full text-xl hover:bg-gray-50"]
+              svg[ xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-excel-fill" viewBox="0 0 16 16"]
+                path[ d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM5.884 4.68 8 7.219l2.116-2.54a.5.5 0 1 1 .768.641L8.651 8l2.233 2.68a.5.5 0 0 1-.768.64L8 8.781l-2.116 2.54a.5.5 0 0 1-.768-.641L7.349 8 5.116 5.32a.5.5 0 1 1 .768-.64z"]
+
+

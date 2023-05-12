@@ -20,6 +20,7 @@ class Product < ApplicationRecord
   #===== Associations
   has_many :historicals, as: :movement
   has_many :product_categories, class_name: Product::Category.name, foreign_key: :product_id
+  has_many_attached :pictures
 
   def category
     self.product_categories&.sample&.category

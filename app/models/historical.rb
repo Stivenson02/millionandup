@@ -26,7 +26,9 @@ class Historical < ApplicationRecord
                  edit: 1,
                  remove_category_of_product: 2,
                  added_category_of_product: 3,
-                 rejected: 4 }, _default: :created
+                 added_images: 4,
+                 remove_image: 5,
+                 rejected: 6 }, _default: :created
 
   #===== Associations
   belongs_to :admin

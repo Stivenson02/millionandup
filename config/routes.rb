@@ -28,7 +28,13 @@ Rails.application.routes.draw do
             put :add_product_categories
           end
         end
-        resources :products
+        resources :products do
+          member do
+            get :product_images
+            post :add_product_images
+            delete :destroy_product_image
+          end
+        end
       end
     end
   end

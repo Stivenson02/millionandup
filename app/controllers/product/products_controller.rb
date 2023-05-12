@@ -1,5 +1,5 @@
 class Product::ProductsController < ApplicationController
-  before_action :set_product_product, only: %i[ show edit update destroy ]
+  before_action :set_product_product, only: %i[ show edit update destroy product_images add_product_images destroy_product_image]
   before_action :set_categories, only: %i[ show ]
 
   # GET /product/products or /product/products.json
@@ -69,6 +69,32 @@ class Product::ProductsController < ApplicationController
     end
   end
 
+  def product_images; end
+
+  def add_product_images
+    respond_to do |format|
+      if @product_product.pictures.attach(params[:pictures])
+        Historical.create(admin: current_admin, movement: @product_product, change: :added_images)
+        format.html { redirect_to product_images_product_product_path(id: @product_product.id), notice: { message: "Image added success.", status: true } }
+        format.json { render :product_images, status: :ok, location: @product_product }
+      else
+        format.html { redirect_to product_images_product_product_path(id: @product_product.id), notice: { message: "Image added faild.", status: false } }
+      end
+    end
+  end
+
+  def destroy_product_image
+    respond_to do |format|
+      if @product_product.pictures.find(params[:picture_id]).purge
+        Historical.create(admin: current_admin, movement: @product_product, change: :remove_image)
+        format.html { redirect_to product_images_product_product_path(id: @product_product.id), notice: { message: "Image remove success.", status: true } }
+        format.json { render :product_images, status: :ok, location: @product_product }
+      else
+        format.html { redirect_to product_images_product_product_path(id: @product_product.id), notice: { message: "Image remove faild.", status: false } }
+      end
+    end
+
+  end
   # DELETE /product/products/1 or /product/products/1.json
   def destroy
     @product_product.destroy
@@ -94,4 +120,5 @@ class Product::ProductsController < ApplicationController
   def product_product_params
     params.permit(:title, :description, :discountPercentage, :price, :stock, :thumbnail)
   end
+
 end
