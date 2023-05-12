@@ -24,8 +24,9 @@ class Historical < ApplicationRecord
   #== Enum
   enum change: { created: 0,
                  edit: 1,
-                 canceled: 2,
-                 rejected: 3 }, _default: :created
+                 remove_category_of_product: 2,
+                 added_category_of_product: 3,
+                 rejected: 4 }, _default: :created
 
   #===== Associations
   belongs_to :admin

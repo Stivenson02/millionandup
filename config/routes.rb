@@ -23,7 +23,11 @@ Rails.application.routes.draw do
         get 'dashboard/index', as: :authenticated_root
       end
       namespace :product do
-        resources :categories
+        resources :categories do
+          collection do
+            put :add_product_categories
+          end
+        end
         resources :products
       end
     end

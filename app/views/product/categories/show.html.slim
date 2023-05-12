@@ -36,6 +36,58 @@
                     span[ class="relative"]
                       | Edit
 
+  .flex.items-center.justify-between.pb-6
+    div
+      h2.text-gray-600.font-semibold
+        | Products
+      span.text-xs
+        | Productos que tienen la categoria
+
+  div
+    div[class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto"]
+      .inline-block.min-w-full.shadow.rounded-lg.overflow-hidden
+        table.min-w-full.leading-normal
+          thead
+            tr
+              th[class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"]
+                | Product
+              th[class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"]
+                | Creator
+              th[class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"]
+                | Created At
+              th[class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"]
+                | H
+              th[class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"]
+                |
+          tbody
+            -@product_category.product_categories.each do |product_category|
+              tr
+                == render product_category.product
+
+
+  .flex.items-center.justify-between.pb-6
+    div
+      h2.text-gray-600.font-semibold
+        | Product Historical
+      span.text-xs
+        | historico de la categoria
+  div
+    div[class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto"]
+      .inline-block.min-w-full.shadow.rounded-lg.overflow-hidden
+        table.min-w-full.leading-normal
+          thead
+            tr
+              th[class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"]
+                | Admin
+              th[class="px-5 py-3 bordr-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"]
+                | Date At
+              th[class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"]
+                | Change
+          tbody
+            - @product_category.historicals.sort.each do |historical|
+              tr
+                == render 'partials/historical', historical: historical
+
 
 
 

@@ -1,0 +1,12 @@
+div id="#{dom_id historical}"
+  td[ class="px-5 py-5 border-b border-gray-200 bg-white text-sm"]
+    p.text-gray-900.whitespace-no-wrap
+      = historical.admin.email
+
+  td[ class="px-5 py-5 border-b border-gray-200 bg-white text-sm"]
+    p.text-gray-900.whitespace-no-wrap
+      = historical.created_at
+
+  td[ class="px-5 py-5 border-b border-gray-200 bg-white text-sm"]
+    p.text-gray-900.whitespace-no-wrap
+      = I18n.t (historical.change)

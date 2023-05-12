@@ -1,6 +1,6 @@
 class Product::ProductsController < ApplicationController
   before_action :set_product_product, only: %i[ show edit update destroy ]
-  before_action :set_categories
+  before_action :set_categories, only: %i[ show ]
 
   # GET /product/products or /product/products.json
   def index
@@ -35,7 +35,7 @@ class Product::ProductsController < ApplicationController
     respond_to do |format|
       if @product_product.save
         Historical.create(admin: current_admin, movement: @product_product, change: :created)
-        format.html { redirect_to product_product_url(@product_product), notice: "Product was successfully created." }
+        format.html { redirect_to product_product_url(@product_product), notice: { message: "Product was successfully created.", status: true } }
         format.json { render :show, status: :created, location: @product_product }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -60,7 +60,7 @@ class Product::ProductsController < ApplicationController
 
       if @product_product.save!
         Historical.create(admin: current_admin, movement: @product_product, change: :edit)
-        format.html { redirect_to product_product_url(@product_product), notice: "Product was successfully updated." }
+        format.html { redirect_to product_product_url(@product_product), notice: { message: "Product was successfully updated.", status: true } }
         format.json { render :show, status: :ok, location: @product_product }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -74,7 +74,7 @@ class Product::ProductsController < ApplicationController
     @product_product.destroy
 
     respond_to do |format|
-      format.html { redirect_to product_products_url, notice: "Product was successfully destroyed." }
+      format.html { redirect_to product_products_url, notice: { message: "Product was successfully destroyed.", status: true } }
       format.json { head :no_content }
     end
   end
@@ -82,7 +82,7 @@ class Product::ProductsController < ApplicationController
   private
 
   def set_categories
-    @categories = Category.all
+    @categories = Category.where.not(id: Category.joins(:product_categories).where(product_categories: { product: @product_product }))
   end
 
   # Use callbacks to share common setup or constraints between actions.
