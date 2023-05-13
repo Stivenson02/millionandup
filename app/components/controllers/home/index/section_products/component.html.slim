@@ -10,6 +10,11 @@ section.py-10.bg-gray-100
             = "#{product[:title]}"
           p.mt-1.text-sm.text-slate-400
             = "#{product.category&.name} | stock: #{product[:stock]}"
+          -if product.pictures.attached?
+            a[class="mt-1 text-sm text-slate-400"
+              data-reflex='click->::ShowImgProductsReflex#show_modal_img'
+              data-product-id="#{product[:id]}"]
+              | Show Images
           .mt-3.flex.items-end.justify-between
             p.text-lg.font-bold.text-blue-500
               = "#{product.price.format}"
