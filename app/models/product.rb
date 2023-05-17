@@ -26,6 +26,11 @@ class Product < ApplicationRecord
     self.product_categories&.sample&.category
   end
 
+  def created_admin
+    self.historicals.where(change: :created).last.admin
+  end
+
+
   validates :description,
             :discountPercentage,
             :stock,

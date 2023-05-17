@@ -14,6 +14,6 @@ class HomeController < ApplicationController
   end
 
   def set_products
-    @products = Product.order(:title, :price_cents)
+    @products = Product.order(:updated_at, :price_cents).reverse
   end
 end

@@ -7,7 +7,7 @@ class TrolleyReflex < ApplicationReflex
     trolley = TrolleyService.new(product: product, user_ip: element[:data_user_ip], user_login: element[:data_user_login]).call
     t_count = 0
     trolley[:response][:data].trolley_details.each { |a| t_count = t_count + a.amount }
-    return morph "#count_trolley", render(::Controllers::Home::Index::SectionTrolley::Component.new(options: { trolley_count: t_count, user_ip: element[:data_user_ip], user_login: element[:data_user_login]}))
+    return morph "#count_trolley", render(::Controllers::Home::Index::SectionTrolley::Component.new(options: { trolley_count: t_count, user_ip: element[:data_user_ip], user_login: element[:data_user_login] }))
   end
 
   def delete_trolley_detail
@@ -30,6 +30,16 @@ class TrolleyReflex < ApplicationReflex
   def checkout
     trolley = Trolley.find(element[:data_trolley_id].to_i)
     trolley.paid!
+    trolley.reload
+
+    if trolley.user.trolleys.where(status: :paid).count == 1
+      admin_detail = trolley.trolley_details.group_by { |td| td.product.created_admin.email }
+
+      admin_detail.each do |value|
+        PurchaseMailer.with(admin_email: value[0], trolley_detail: value[1]).purchase_created.deliver_later
+      end
+    end
+
     return close_modal_trolley
   end
 end

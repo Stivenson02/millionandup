@@ -1,0 +1,13 @@
+' Purchase
+= "\r\n" * 2
+' A customer bought the following products on their first purchase
+= "\r\n" * 2
+- @trolley_detail.each do |detail|
+  ' Product: #{detail.product.title}
+  = "\r\n" * 2
+  ' Quantity: #{detail.amount}
+  = "\r\n" * 2
+  ' Amount: #{detail.price.format}
+  = "\r\n" * 2
+
+

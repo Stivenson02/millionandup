@@ -13,9 +13,12 @@
               | Close
 
             div[class="mr-28" ]
-              button[class="mt-3 inline-flex w-full justify-center rounded-md bg-lime-500 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-green-300 hover:bg-green-50 sm:mt-0 sm:w-auto"
-                data-reflex='click->::TrolleyReflex#checkout' data-trolley-id= "#{@trolley.id}"]
-                  | Checkout
+              -unless @user_login.nil?
+                button[class="mt-3 inline-flex w-full justify-center rounded-md bg-lime-500 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-green-300 hover:bg-green-50 sm:mt-0 sm:w-auto"
+                  data-reflex='click->::TrolleyReflex#checkout'
+                  data-user-id= @user_login
+                  data-trolley-id= "#{@trolley.id}"]
+                    | Checkout
 
             div[class="mr-20" ]
               p

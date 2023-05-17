@@ -22,5 +22,7 @@ class Trolley < ApplicationRecord
   #===== Associations
   has_many :trolley_details
   has_one :trolley_user, dependent: :destroy, inverse_of: :trolley
+  has_one :user, through: :trolley_user
+
 
 end

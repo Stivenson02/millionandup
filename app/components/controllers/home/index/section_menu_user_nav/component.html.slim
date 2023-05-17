@@ -2,7 +2,7 @@
   ul.mt-4.flex.flex-col.rounded-lg.border.border-gray-100.bg-gray-50.p-4.md:mt-0.md:flex-row.md:space-x-8.md:border-0.md:bg-white.md:text-sm.md:font-medium
     -unless @user_login.nil?
       li
-        =render ::Controllers::Home::Index::SectionShoppingHistory::Component.new
+        a[data-reflex='click->::HistoryReflex#show_modal_history' data-user-login= @user_login] Historial
     li
       = render ::Controllers::Home::Index::SectionFilter::Component.new(options: { products: @products })
     li

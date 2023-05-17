@@ -1,0 +1,20 @@
+h1 Purchase
+p A customer bought the following products on their first purchase
+ul
+  - @trolley_detail.each do |detail|
+    li
+      p
+        strong
+          = detail.product.title
+
+    li
+      p
+        strong Quantity:
+        = detail.amount%
+
+    li
+      p
+        strong Amount:
+        = detail.price.format
+    br
+
