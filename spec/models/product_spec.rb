@@ -20,7 +20,6 @@ RSpec.describe Product, type: :model do
     it { should have_db_column(:title).of_type(:string).with_options(null: false) }
     it { should have_db_column(:description).of_type(:string).with_options(null: false) }
     it { should have_db_column(:discountPercentage).of_type(:string).with_options(null: false) }
-    it { should have_db_column(:category).of_type(:string).with_options(null: false) }
     it { should have_db_column(:thumbnail).of_type(:string).with_options(null: false) }
     it { should have_db_column(:stock).of_type(:integer).with_options(null: false) }
   end

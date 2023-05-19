@@ -21,5 +21,8 @@
 require 'rails_helper'
 
 RSpec.describe TrolleyUser, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "fields" do
+    it { should have_db_column(:trolley_id).of_type(:integer).with_options(null: false) }
+    it { should have_db_column(:user_id).of_type(:integer).with_options(null: false) }
+  end
 end

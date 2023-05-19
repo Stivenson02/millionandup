@@ -3,7 +3,7 @@ class CreateHistoricals < ActiveRecord::Migration[7.0]
     create_table :historicals do |t|
       t.references :admin, null: false, foreign_key: { to_table: :admins }
       t.references :movement, polymorphic: true, null: false
-      t.integer :change
+      t.integer :change, null: false
 
       t.timestamps
     end

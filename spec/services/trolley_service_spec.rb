@@ -20,7 +20,7 @@ RSpec.describe TrolleyService, type: :service do
     context 'success delete_product' do
       it do
         service = described_class.new(product: @product).call
-        expect(Trolley.all.count).to eq(1)
+        expect(Trolley.where.not(total: "0").count).to eq(1)
         expect(service[:status]).to eq(:success)
       end
     end

@@ -3,7 +3,7 @@
 # Table name: historicals
 #
 #  id            :bigint           not null, primary key
-#  change        :integer
+#  change        :integer          not null
 #  movement_type :string           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

@@ -21,5 +21,8 @@
 require 'rails_helper'
 
 RSpec.describe Product::Category, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "fields" do
+    it { should have_db_column(:category_id).of_type(:integer).with_options(null: false) }
+    it { should have_db_column(:category_id).of_type(:integer).with_options(null: false) }
+  end
 end

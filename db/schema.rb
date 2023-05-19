@@ -55,7 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_201210) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -64,7 +64,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_201210) do
     t.bigint "admin_id", null: false
     t.string "movement_type", null: false
     t.bigint "movement_id", null: false
-    t.integer "change"
+    t.integer "change", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_id"], name: "index_historicals_on_admin_id"

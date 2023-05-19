@@ -19,5 +19,7 @@
 require 'rails_helper'
 
 RSpec.describe Admin, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "fields" do
+    it { should have_db_column(:email).of_type(:string).with_options(null: false) }
+  end
 end

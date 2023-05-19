@@ -3,7 +3,7 @@
 # Table name: historicals
 #
 #  id            :bigint           not null, primary key
-#  change        :integer
+#  change        :integer          not null
 #  movement_type :string           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -22,5 +22,8 @@
 require 'rails_helper'
 
 RSpec.describe Historical, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "fields" do
+    it { should have_db_column(:change).of_type(:integer).with_options(null: false) }
+    it { should have_db_column(:movement_type).of_type(:string).with_options(null: false) }
+  end
 end

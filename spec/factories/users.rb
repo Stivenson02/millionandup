@@ -17,7 +17,10 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 FactoryBot.define do
-  factory :user do
-    
+  model = ::User
+  factory_key = model.model_name.singular.to_sym
+  factory factory_key, class: model do
+    email { "test@testing.es" }
+    password { "123456" }
   end
 end
